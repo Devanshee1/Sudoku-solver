@@ -2,27 +2,35 @@
 <html>
 <head>
   <title>Sudoku Solver</title>
+  <!-- Link to external JavaScript files -->
   <script type="text/javascript" src="sudoku.js"></script>
   <script type="text/javascript" src="analytics.js"></script>
   <style type="text/css">
+    /* Basic styles for the body and container */
     body { font-family: Calibri, sans-serif; }
     #container { text-align: center }
+    /* Styling for the Sudoku board */
     table { border-collapse: collapse; font-size: 2em; margin: 0 auto; }
     colgroup, tbody { border: solid medium; }
     td { border: solid thin; height: 1.4em; width: 1.4em; text-align: center; padding: 0; }
+    /* Button styles */
     button { margin-top: 15px; font-size: 1.5em; }
     .padd { padding-bottom: 100px; }
   </style>
 </head>
 <body>
   <div id="container">
+    <!-- Sudoku Solver header and image -->
     <img src="gfg.png" style="height:100px; width:400px; float:left;" />
     <h1 class="padd">Sudoku Solver</h1>
+    <!-- Sudoku board table -->
     <table id="sudoku-board">
+      <!-- Define column groups for the board -->
       <colgroup><col><col><col></colgroup>
       <colgroup><col><col><col></colgroup>
       <colgroup><col><col><col></colgroup>
       <tbody>
+        <!-- Each row contains 9 editable cells -->
         <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
         <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
         <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
@@ -34,6 +42,7 @@
         <tr><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td><td contenteditable="true"></td></tr>
       </tbody>
     </table>
+    <!-- Buttons for solving and clearing the board -->
     <div>
       <button id="solve-button">Solve!</button>
     </div>
@@ -43,6 +52,7 @@
   </div>
 
   <script type="text/javascript">
+    // Add event listener for keyup events on the Sudoku board
     document.getElementById("sudoku-board").addEventListener("keyup", function(event) {
       if(event.target && event.target.nodeName === "TD") {
         var validNum = /[1-9]/;
@@ -55,6 +65,7 @@
       }
     });
 
+    // Add event listener for clicking the solve button
     document.getElementById("solve-button").addEventListener("click", function() {
       var boardString = boardToString();
       var solution = SudokuSolver.solve(boardString);
@@ -65,8 +76,10 @@
       }
     });
 
+    // Add event listener for clicking the clear button
     document.getElementById("clear-button").addEventListener("click", clearBoard);
 
+    // Function to clear the Sudoku board
     function clearBoard() {
       var tds = document.getElementsByTagName("td");
       for (var i = 0; i < tds.length; i++) {
@@ -74,6 +87,7 @@
       }
     }
 
+    // Function to Convert the current state of the Sudoku board to a string representation.
     function boardToString() {
       var string = "";
       var validNum = /[1-9]/;
@@ -88,6 +102,7 @@
       return string;
     }
 
+    // Function to Convert a string representation of the Sudoku board back into the board.
     function stringToBoard(string) {
       var currentCell;
       var validNum = /[1-9]/;
